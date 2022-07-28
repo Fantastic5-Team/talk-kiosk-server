@@ -12,14 +12,14 @@ const userService = require("../../app/User/userService");
 const { response, errResponse } = require("../../../config/response");
 const postProvider = require("../Post/postProvider");
 */
-const regexEmail = require("regex-email");
+//const regexEmail = require("regex-email");
 //const {emit} = require("nodemon");
 
 exports.getOrderedJson = async function (req, res) {
     /*
         Path Variable: 
     */
-    const orderedIdx = req.params.orderedIdx; //orederedIdx를 받아온다.
+    /*const orderedIdx = req.params.orderedIdx; //orederedIdx를 받아온다.
 
     // validation 
     if(!orderedIdx) {
@@ -27,9 +27,9 @@ exports.getOrderedJson = async function (req, res) {
     } 
     if (orderedIdx <= 0) {
         //return res.send(errResponse(baseResponse.USER_USERIDX_LENGTH));
-    }
+    }*/
 
-    const jsonInfo = await orderedProvider.retrieveJsonInfo(orderedIdx);
+    const jsonInfo = await orderedProvider.retrieveJsonInfo();
     
     return res.send(response(baseResponse.SUCCESS, {
         jsonInfo: jsonInfo
