@@ -8,12 +8,12 @@ const {response, errResponse} = require("../../../config/response");
 const crypto = require("crypto");
 const {connect} = require("http2");
 
-exports.createOrdered = async function (data) {
+exports.createOrdered = async function (orderJson) {
     try {
 
         const connection = await pool.getConnection(async (conn) => conn);
 
-        const orderNumberResult = await userDao.insertOrderInfo(connection, data);
+        const orderNumberResult = await userDao.insertOrderInfo(connection, orderJson);
         
         connection.release();
         return response(baseResponse.SUCCESS);
