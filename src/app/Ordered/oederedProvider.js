@@ -1,13 +1,12 @@
 const { pool } = require("../../../config/database");
 const orderedDao = require("./orderedDao");
 
-exports.retrieveJsonInfo = async function (orederedIdx) {
+exports.retrieveJsonInfo = async function () {
     const connection = await pool.getConnection(async (conn) => conn);
-    const jsonInfoResult = await orderedDao.selectJsonInfo(connection, orederedIdx);
+    const jsonInfoResult = await orderedDao.selectJsonInfo(connection);
   
     connection.release();
   
     return jsonInfoResult;
-    console.log(jsonInfoResult);
   };
   

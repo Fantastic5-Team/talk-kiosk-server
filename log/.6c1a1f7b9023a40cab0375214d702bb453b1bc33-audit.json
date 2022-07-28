@@ -9,6 +9,11 @@
             "date": 1658989031313,
             "name": "log/2022-07-28-smart-push.log",
             "hash": "bb1780c8587cbee1cd1d1d611e172e1d7edf16f846a621bccfd65c1eb17db16d"
+        },
+        {
+            "date": 1658990202737,
+            "name": "log\\2022-07-28-smart-push.log",
+            "hash": "1960e5d83e0b2780edba0a5c8c968aedd11807422d22676ca9ec8591b9d75455"
         }
     ],
     "hashType": "sha256"

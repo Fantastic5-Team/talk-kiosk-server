@@ -1,16 +1,16 @@
-async function selectJsonInfo(connection, orderedIdx) {
+async function selectJsonInfo(connection) {
     const selectJsonInfoQuery = `
     SELECT ordered
     FROM Ordered
     WHERE status = 'PENDING';
     `
 
-    const [selectJsonInfo] = await connection.query(selectJsonInfoQuery, orderedIdx);
+    const [selectJsonInfo] = await connection.query(selectJsonInfoQuery);
 
-    return selectJsonInfo[0];
+    return selectJsonInfo;
 
 }
 
 module.exports = {
-    selectJsonInfo  
+    selectJsonInfo
   };
