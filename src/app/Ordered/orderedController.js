@@ -1,6 +1,7 @@
 const jwtMiddleware = require("../../../config/jwtMiddleware");
 const orderedProvider = require("../Ordered/oederedProvider");
 const orderedService = require("../Ordered/orderedService");
+const { response, errResponse } = require("../../../config/response");
 const baseResponse = require("../../../config/baseResponseStatus");
 const {emit} = require("nodemon");
 
@@ -14,7 +15,7 @@ const postProvider = require("../Post/postProvider");
 const regexEmail = require("regex-email");
 //const {emit} = require("nodemon");
 
-exports.getJson = async function (req, res) {
+exports.getOrderedJson = async function (req, res) {
     /*
         Path Variable: 
     */
