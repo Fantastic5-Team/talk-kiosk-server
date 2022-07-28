@@ -12,16 +12,18 @@ async function selectJsonInfo(connection) {
 }
 
 // Ordered 테이블에 주문 추가
-async function insertOrderInfo(connection, data) {
-    const ordered = JSON.stringify(data);
+async function insertOrderInfo(connection, orderJson) {
+    const ordereJsonString = JSON.stringify(orderJson); //json string으로 변경
 
+    //ordered에 json을 string으로 insert, status는 PENDING로 insert
     const insertOrderInfoQuery = `
           insert into Ordered (ordered, status)
           values (?, 'PENDING');
       `
+      
     const insertOrderInfoTable = await connection.query(
         insertOrderInfoQuery,
-        ordered
+        ordereJsonString
     );
   
     return insertOrderInfoTable;
