@@ -4,7 +4,7 @@ module.exports = function(app){
 
 
     // 1. json 내용 가져오기
-    app.get('/app/ordered/:orderedIdx',ordered.getOrderedJson);
+    app.get('/app/Ordered/:orderedIdx',ordered.getOrderedJson);
 
 /*
     // 0. 테스트 API

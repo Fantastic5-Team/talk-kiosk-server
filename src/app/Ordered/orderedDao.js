@@ -11,5 +11,6 @@ async function selectJsonInfo(connection, orderedIdx) {
 
 }
 
-
-
+module.exports = {
+    selectJsonInfo  
+  };
