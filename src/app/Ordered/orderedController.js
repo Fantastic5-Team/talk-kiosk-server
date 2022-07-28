@@ -35,3 +35,21 @@ exports.getOrderedJson = async function (req, res) {
         jsonInfo: jsonInfo
     }));
 }
+
+//ordered json을 Ordered에 insert
+exports.postOrdered = async function (req, res) {
+
+    //Body : ordered 객체 
+    const {data} = req.body;
+
+    // 빈 값 체크
+    if (!data)
+        return res.send(response(baseResponse.SIGNUP_EMAIL_EMPTY));
+    
+    const orderedResponse = await orderedService.createOrdered(
+        data
+    );
+
+    return res.send(orderedResponse);
+
+}
