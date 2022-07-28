@@ -4,10 +4,10 @@ module.exports = function(app){
 
 
     // 1. json 내용 가져오기
-    app.get('/app/Ordered',ordered.getOrderedJson);
+    app.get('/app/ordered',ordered.getOrderedJson);
 
     // 2. json으로 테이블 생성
-    app.post('/app/posts', ordered.postOrdered);
+    app.post('/app/ordered', ordered.postOrdered);
 
 /*
     // 0. 테스트 API

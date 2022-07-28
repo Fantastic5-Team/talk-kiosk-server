@@ -1,4 +1,6 @@
 /node_modules
 /src/app/User
+/log
+
 secret.js
 database.js
