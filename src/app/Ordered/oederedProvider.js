@@ -11,7 +11,4 @@ exports.retrieveJsonInfo = async function () {
     connection.release();
   
     return jsonInfoResult;
-    
 };
-
-

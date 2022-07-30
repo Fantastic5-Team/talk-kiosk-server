@@ -18,7 +18,7 @@ exports.createOrdered = async function (orderJson) {
         const connection = await pool.getConnection(async (conn) => conn);
 
         const orderNumberResult = await orderedDao.insertOrderInfo(connection, orderJson);
-        
+
         connection.release();
         return response(baseResponse.SUCCESS);
 

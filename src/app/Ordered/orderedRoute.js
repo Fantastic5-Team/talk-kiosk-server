@@ -6,7 +6,6 @@ module.exports = function(app){
     // 1. status가 PENDING인 ordered json 반환
     app.get('/app/Ordered',ordered.getOrderedJson);
 
-
     // 2. 새로운 주문 row 생성
     app.post('/app/posts', ordered.postOrdered);
 

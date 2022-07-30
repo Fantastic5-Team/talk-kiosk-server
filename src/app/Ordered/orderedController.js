@@ -25,7 +25,6 @@ exports.getOrderedJson = async function (req, res) {
     return res.send(response(baseResponse.SUCCESS, {
         jsonInfo: jsonInfo
     }));
-
 }
 
 /*
@@ -45,7 +44,6 @@ exports.postOrdered = async function (req, res) {
     );
 
     return res.send(orderedResponse);
-
 }
 
 /*

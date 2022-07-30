@@ -16,21 +16,8 @@ async function selectJsonInfo(connection) {
 }
 
 
-/*
-2. 새로운 주문 row 생성
-*/
+// Ordered 테이블에 주문 추가
 async function insertOrderInfo(connection, orderJson) {
-    
-    //orderedIdx 현재 숫자 가져오기
-    const orderedIdxNumQuery = `
-        select count(orderedIdx) as orderedIdx
-        from Ordered;
-    `
-    const [orderedIdxNum] = await connection.query(orderedIdxNumQuery);
-
-    //orderJson에 orderedIdx : orderedIdx +1 추가
-    orderJson.orderedIdx=orderedIdxNum[0]["orderedIdx"]+1;
-    
     const ordereJsonString = JSON.stringify(orderJson); //json string으로 변경
 
     //ordered에 json을 string으로 insert, status는 PENDING로 insert
@@ -46,7 +33,7 @@ async function insertOrderInfo(connection, orderJson) {
   
     return insertOrderInfoTable;
   }
-  
+
   /*
   3. order complete 처리
   */
@@ -67,4 +54,3 @@ module.exports = {
     insertOrderInfo,
     updateOrderComplete
 };
-
