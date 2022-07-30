@@ -1,3 +1,6 @@
+/*
+//1. status가 PENDING인 ordered json 반환
+*/
 async function selectJsonInfo(connection, status) {
     const selectJsonInfoQuery = `
     SELECT ordered, orderedIdx
@@ -10,6 +13,7 @@ async function selectJsonInfo(connection, status) {
     return selectJsonInfo;
 
 }
+
 
 // Ordered 테이블에 주문 추가
 async function insertOrderInfo(connection, orderJson) {
@@ -29,7 +33,23 @@ async function insertOrderInfo(connection, orderJson) {
     return insertOrderInfoTable;
   }
 
+  /*
+  3. order complete 처리
+  */
+  async function updateOrderComplete(connection, orderedIdx) {
+    const updateOrderQuery = `
+        UPDATE Ordered
+        SET status = "COMPLETE"
+        WHERE orderedIdx = ?;
+    `
+
+    const updateOrderRow = await connection.query(updateOrderQuery, orderedIdx);
+
+    return updateOrderRow;
+  }
+
 module.exports = {
     selectJsonInfo,
-    insertOrderInfo
+    insertOrderInfo,
+    updateOrderComplete
 };
