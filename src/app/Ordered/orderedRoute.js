@@ -3,8 +3,15 @@ module.exports = function(app){
     const jwtMiddleware = require('../../../config/jwtMiddleware');
 
 
-    // 1. json 내용 가져오기
+    // 1. status가 PENDING인 ordered json 반환
     app.get('/app/Ordered',ordered.getOrderedJson);
+
+
+    // 2. 새로운 주문 row 생성
+    app.post('/app/posts', ordered.postOrdered);
+
+    //3. order complete 처리
+    app.patch('/app/ordered/:orderedIdx', ordered.orderComplete);
 
 /*
     // 0. 테스트 API
