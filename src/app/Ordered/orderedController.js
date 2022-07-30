@@ -16,20 +16,12 @@ const postProvider = require("../Post/postProvider");
 //const {emit} = require("nodemon");
 
 exports.getOrderedJson = async function (req, res) {
-    /*
-        Path Variable: 
-    */
-    /*const orderedIdx = req.params.orderedIdx; //orederedIdx를 받아온다.
+    let status = req.query.status;
+    
+    if (!status) status = "PENDING";
+    status = status.toUpperCase();
 
-    // validation 
-    if(!orderedIdx) {
-        //return res.send(errResponse(baseResponse.USER_USERIDX_EMPTY));
-    } 
-    if (orderedIdx <= 0) {
-        //return res.send(errResponse(baseResponse.USER_USERIDX_LENGTH));
-    }*/
-
-    const jsonInfo = await orderedProvider.retrieveJsonInfo();
+    const jsonInfo = await orderedProvider.retrieveJsonInfo(status);
     
     return res.send(response(baseResponse.SUCCESS, {
         jsonInfo: jsonInfo
