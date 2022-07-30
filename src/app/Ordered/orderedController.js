@@ -19,8 +19,12 @@ const postProvider = require("../Post/postProvider");
 1. status가 PENDING인 ordered json 반환
 */
 exports.getOrderedJson = async function (req, res) {
+    let status = req.query.status;
+    
+    if (!status) status = "PENDING";
+    status = status.toUpperCase();
 
-    const jsonInfo = await orderedProvider.retrieveJsonInfo();
+    const jsonInfo = await orderedProvider.retrieveJsonInfo(status);
     
     return res.send(response(baseResponse.SUCCESS, {
         jsonInfo: jsonInfo

@@ -1,15 +1,14 @@
 /*
 //1. status가 PENDING인 ordered json 반환
 */
-async function selectJsonInfo(connection) {
-    //status가 PENDING인 ordered 반환
+async function selectJsonInfo(connection, status) {
     const selectJsonInfoQuery = `
-    SELECT ordered
+    SELECT ordered, orderedIdx
     FROM Ordered
-    WHERE status = 'PENDING';
+    WHERE status = ?;
     `
 
-    const [selectJsonInfo] = await connection.query(selectJsonInfoQuery);
+    const [selectJsonInfo] = await connection.query(selectJsonInfoQuery, status);
 
     return selectJsonInfo;
 
