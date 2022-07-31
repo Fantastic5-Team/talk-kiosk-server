@@ -5,12 +5,12 @@ const baseResponse = require("../../../config/baseResponseStatus");
 const {response, errResponse} = require("../../../config/response");
 
 //const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
-const {connect} = require("http2");
+//const crypto = require("crypto");
+//const {connect} = require("http2");
 
 
 /*
-2. 새로운 주문 row 생성
+2. 입력받은 json으로 새로운 주문 row 생성
 */
 exports.createOrdered = async function (orderJson) {
     try {
@@ -20,8 +20,8 @@ exports.createOrdered = async function (orderJson) {
         const orderNumberResult = await orderedDao.insertOrderInfo(connection, orderJson);
 
         connection.release();
-        return response(baseResponse.SUCCESS);
 
+        return response(baseResponse.SUCCESS);
 
     } catch (err) {
         logger.error(`App - createOrdered Service error\n: ${err.message}`);
@@ -30,13 +30,15 @@ exports.createOrdered = async function (orderJson) {
 };
 
 /*
-3. order complete 처리
+3. 주문 status 변환 (COMPLETE or DELETE)
 */
-exports.editOrderComplete = async function (orderedIdx) {
+exports.editOrderComplete = async function (orderedIdx, editStatus) {
+
+
     const connection = await pool.getConnection(async (conn) => conn);
 
     try {
-        const editorderCompleteResult = await orderedDao.updateOrderComplete(connection, orderedIdx);
+        const editorderCompleteResult = await orderedDao.updateOrderComplete(connection, orderedIdx, editStatus);
         return response(baseResponse.SUCCESS);
     } catch (err) {
         console.log(`App - editOrder Service erro/: ${err.message}`);
