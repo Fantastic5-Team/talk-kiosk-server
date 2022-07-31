@@ -3,7 +3,7 @@ const orderedDao = require("./orderedDao");
 
 
 /*
-1. 1. status가 PENDING인 ordered json 반환
+1. 입력받은 status에 해당하는 ordered json 반환
 */
 exports.retrieveJsonInfo = async function (status) {
     const connection = await pool.getConnection(async (conn) => conn);
