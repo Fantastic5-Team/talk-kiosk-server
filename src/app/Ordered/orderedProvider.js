@@ -12,3 +12,11 @@ exports.retrieveJsonInfo = async function (status) {
 
   return jsonInfoResult;
 };
+
+exports.checkOrderedStatus = async function (orderedIdx) {
+  const connection = await pool.getConnection(async (conn) => conn);
+  const orderedStatusResult = await orderedDao.checkOrderedStatus(connection, orderedIdx);
+  connection.release();
+
+  return orderedStatusResult[0].status;
+}

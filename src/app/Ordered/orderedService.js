@@ -1,6 +1,7 @@
 const { logger } = require("../../../config/winston");
 const { pool } = require("../../../config/database");
 const orderedDao = require("./orderedDao");
+const orderedProvider = require("./orderedProvider");
 const baseResponse = require("../../../config/baseResponseStatus");
 const { response, errResponse } = require("../../../config/response");
 
@@ -35,6 +36,12 @@ exports.createOrdered = async function (orderJson) {
 exports.editOrderComplete = async function (orderedIdx, editStatus) {
   try {
     const connection = await pool.getConnection(async (conn) => conn);
+
+    const orderedStatus = await orderedProvider.checkOrderedStatus(orderedIdx); //orderedIdx의 현재 status상태를 확인한다.
+
+    if (orderedStatus == undefined) {
+        return errResponse(baseResponse.TOKEN_EMPTY);
+    } //orderedStatus가 없을경우 에러를 리턴한다.
 
     const editorderCompleteResult = await orderedDao.updateOrderComplete(
       connection,

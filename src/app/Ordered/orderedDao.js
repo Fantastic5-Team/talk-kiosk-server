@@ -58,8 +58,21 @@ async function updateOrderComplete(connection, orderedIdx, editStatus) {
   return updateOrderRow;
 }
 
+async function checkOrderedStatus(connection, orderedIdx) {
+  const selectOrderedStatusQuery = `
+      SELECT status
+      FROM Ordered
+      WHERE orderedIdx = ?;
+  `;
+
+  const [OrderedStatusRow] = await connection.query(selectOrderedStatusQuery, orderedIdx);
+
+  return OrderedStatusRow;
+}
+
 module.exports = {
   selectJsonInfo,
   insertOrderInfo,
   updateOrderComplete,
+  checkOrderedStatus
 };
