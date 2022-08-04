@@ -11,8 +11,11 @@ const baseResponse = require("../../../config/baseResponseStatus");
 exports.getOrderedJson = async function (req, res) {
   let status = req.query.status; //query에서 status를 받아온다.
 
-  if (!status) status = "PENDING"; //default는 PENDING
   status = status.toUpperCase(); //대문자 변환
+  if (!status) status = "PENDING"; //default는 PENDING
+  if (status !== "PENDING" && status !== "COMPLETE" && status !== "DELETED") {
+    return res.send(errResponse(baseResponse.ORDERED_INPUT_ERROR));
+  }
 
   const jsonInfo = await orderedProvider.retrieveJsonInfo(status);
 
@@ -27,10 +30,11 @@ exports.getOrderedJson = async function (req, res) {
     2. 입력받은 json으로 새로운 주문 row 생성
 */
 exports.postOrdered = async function (req, res) {
-  const { data } = req.body; //Body: data 객체
+  const { data} = req.body; //Body: data 객체
 
-  // 빈 값 체크
-  if (!data) return res.send(response(baseResponse.SIGNUP_EMAIL_EMPTY));
+  if (!data.order) return res.send(response(baseResponse.ORDERED_NEWROW_ERROR)); //order 번호가 없는 경우 주문 row 생성 취소
+  if (!data) return res.send(response(baseResponse.SIGNUP_PASSWORD_LENGTH)); //이게 정상적으로 실행이 안됨
+  
 
   const orderedResponse = await orderedService.createOrdered(data);
 
@@ -44,17 +48,26 @@ exports.orderComplete = async function (req, res) {
   const orderedIdx = req.params.orderedIdx;
   let editStatus = req.query.status; //바꾸려는 status 상태 (COMPLETE or DELETE)
 
-  if (!editStatus) editStatus = "PENDING"; //default는 PENDING
-  editStatus = editStatus.toUpperCase();
+  //if (!editStatus) editStatus = "PENDING"; ///default는 PENDING 웅아 이거 default값을 설정할꺼야??????????
+  if (!editStatus) {
+    return res.send(errResponse(baseResponse.ORDERED_CHANGESTATUS_NOSTATUS));
+  }
+  else {
+    editStatus = editStatus.toUpperCase()
+  }//입력값이 있으면 전부대문자로 바꾸어준다.
 
-  if (!orderedIdx)
-    return res.send(errResponse(baseResponse.POST_POSITDX_EMPTY));
+  if (editStatus !== "PENDING" && editStatus !== "COMPLETE" && editStatus !== "DELETED") {
+    return res.send(errResponse(baseResponse.ORDERED_CHANGESTATUS_ERRORSTATUS));
+  } //Pending complete delted중에 값이 없는경우.
 
-  if (!editStatus)
-    return res.send(errResponse(baseResponse.POST_POSITDX_EMPTY));
+  console.log(orderedIdx);
+  if (!orderedIdx) {
+    console.log("값이 없는 경우");
+    return res.send(errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL));
+  }
 
   if (orderedIdx <= 0)
-    return res.send(errResponse(baseResponse.POST_POSITDX_LENGTH));
+    return res.send(errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL));
 
   const editOrderCompleteResponse = await orderedService.editOrderComplete(
     orderedIdx,

@@ -9,11 +9,13 @@ module.exports = {
     TOKEN_VERIFICATION_SUCCESS : { "isSuccess": true, "code": 1001, "message":"JWT 토큰 검증 성공" }, // ?
 
     //Request error
-    SIGNUP_EMAIL_EMPTY : { "isSuccess": false, "code": 2001, "message":"이메일을 입력해주세요" },
-    SIGNUP_EMAIL_LENGTH : { "isSuccess": false, "code": 2002, "message":"이메일은 30자리 미만으로 입력해주세요." },
-    SIGNUP_EMAIL_ERROR_TYPE : { "isSuccess": false, "code": 2003, "message":"이메일을 형식을 정확하게 입력해주세요." },
-    SIGNUP_PASSWORD_EMPTY : { "isSuccess": false, "code": 2004, "message": "비밀번호를 입력 해주세요." },
-    SIGNUP_PASSWORD_LENGTH : { "isSuccess": false, "code": 2005, "message":"비밀번호는 6~20자리를 입력해주세요." },
+    ORDERED_INPUT_ERROR: { "isSuccess": false, "code": 2001, "message": "status 값이 잘못 되었습니다." },
+    ORDERED_NEWROW_ERROR: { "isSuccess": false, "code": 2002, "message": "data의 형식이 잘못 되었습니다. order 존재 X" },
+    ORDERED_CHANGESTATUS_NOSTATUS: { "isSuccess": false, "code": 2003, "message": "status를 입력해주세요." },
+    ORDERED_CHANGESTATUS_ERRORSTATUS: { "isSuccess": false, "code": 2004, "message": "일치하는 status가 없습니다." },
+    OREDERED_CHANGESTATUS_NOORDERIDX: { "isSuccess": false, "code": 2005, "message": "일치하는 orderedIdx가 없습니다." },
+    
+
     SIGNUP_NICKNAME_EMPTY : { "isSuccess": false, "code": 2006, "message":"닉네임을 입력 해주세요." },
     SIGNUP_NICKNAME_LENGTH : { "isSuccess": false,"code": 2007,"message":"닉네임은 최대 20자리를 입력해주세요." },
 
