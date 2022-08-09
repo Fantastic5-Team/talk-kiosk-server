@@ -48,26 +48,21 @@ exports.orderComplete = async function (req, res) {
   const orderedIdx = req.params.orderedIdx;
   let editStatus = req.query.status; //바꾸려는 status 상태 (COMPLETE or DELETE)
 
-  //if (!editStatus) editStatus = "PENDING"; ///default는 PENDING 웅아 이거 default값을 설정할꺼야??????????
   if (!editStatus) {
     return res.send(errResponse(baseResponse.ORDERED_CHANGESTATUS_NOSTATUS));
   }
-  else {
-    editStatus = editStatus.toUpperCase()
-  }//입력값이 있으면 전부대문자로 바꾸어준다.
+  editStatus = editStatus.toUpperCase();
 
   if (editStatus !== "PENDING" && editStatus !== "COMPLETE" && editStatus !== "DELETED") {
     return res.send(errResponse(baseResponse.ORDERED_CHANGESTATUS_ERRORSTATUS));
   } //Pending complete delted중에 값이 없는경우.
 
-  console.log(orderedIdx);
   if (!orderedIdx) {
-    console.log("값이 없는 경우");
-    return res.send(errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL));
+    return res.send(errResponse(baseResponse.ORDERED_CHANGESTATUS_NOORDERIDX));
   }
 
   if (orderedIdx <= 0)
-    return res.send(errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL));
+    return res.send(errResponse(baseResponse.ORDERED_CHANGESTATUS_NEGATIVEIDX));
 
   const editOrderCompleteResponse = await orderedService.editOrderComplete(
     orderedIdx,

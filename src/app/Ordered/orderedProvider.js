@@ -16,7 +16,8 @@ exports.retrieveJsonInfo = async function (status) {
 exports.checkOrderedStatus = async function (orderedIdx) {
   const connection = await pool.getConnection(async (conn) => conn);
   const orderedStatusResult = await orderedDao.checkOrderedStatus(connection, orderedIdx);
+  console.log(orderedStatusResult[0].t);
   connection.release();
 
-  return orderedStatusResult[0].status;
+  return orderedStatusResult[0].t;
 }
