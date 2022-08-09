@@ -39,7 +39,7 @@ exports.editOrderComplete = async function (orderedIdx, editStatus) {
 
     const orderedStatus = await orderedProvider.checkOrderedStatus(orderedIdx); //orderedIdx의 현재 status상태를 확인한다.
 
-    if (orderedStatus == false) {
+    if (!orderedStatus) {
         return errResponse(baseResponse.ORDERED_CHANGESTATUS_NOORDEREDIDX);
     } //orderedStatus가 없을경우 에러를 리턴한다.
 
