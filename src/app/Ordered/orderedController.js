@@ -63,11 +63,11 @@ exports.orderComplete = async function (req, res) {
   console.log(orderedIdx);
   if (!orderedIdx) {
     console.log("값이 없는 경우");
-    return res.send(errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL));
+    return res.send(errResponse(baseResponse.ORDERED_CHANGESTATUS_NOORDERIDX));
   }
 
   if (orderedIdx <= 0)
-    return res.send(errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL));
+    return res.send(errResponse(baseResponse.ORDERED_CHANGESTATUS_NEGATIVEIDX));
 
   const editOrderCompleteResponse = await orderedService.editOrderComplete(
     orderedIdx,

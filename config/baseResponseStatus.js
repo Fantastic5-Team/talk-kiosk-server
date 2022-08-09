@@ -13,11 +13,9 @@ module.exports = {
     ORDERED_NEWROW_ERROR: { "isSuccess": false, "code": 2002, "message": "data의 형식이 잘못 되었습니다. order 존재 X" },
     ORDERED_CHANGESTATUS_NOSTATUS: { "isSuccess": false, "code": 2003, "message": "status를 입력해주세요." },
     ORDERED_CHANGESTATUS_ERRORSTATUS: { "isSuccess": false, "code": 2004, "message": "일치하는 status가 없습니다." },
-    OREDERED_CHANGESTATUS_NOORDERIDX: { "isSuccess": false, "code": 2005, "message": "일치하는 orderedIdx가 없습니다." },
-    
-
-    SIGNUP_NICKNAME_EMPTY : { "isSuccess": false, "code": 2006, "message":"닉네임을 입력 해주세요." },
-    SIGNUP_NICKNAME_LENGTH : { "isSuccess": false,"code": 2007,"message":"닉네임은 최대 20자리를 입력해주세요." },
+    ORDERED_CHANGESTATUS_NOORDERIDX: { "isSuccess": false, "code": 2005, "message": "orderedIdx를 입력해주세요." },
+    ORDERED_CHANGESTATUS_NEGATIVEIDX: { "isSuccess": false, "code": 2006, "message": "양수 orderedIdx을 입력해주세요." },
+    ORDERED_CHANGESTATUS_NOORDEREDIDX : { "isSuccess": false,"code": 2007,"message":"일치하는 orderedIdx가 없습니다." },
 
     SIGNIN_EMAIL_EMPTY : { "isSuccess": false, "code": 2008, "message":"이메일을 입력해주세요" },
     SIGNIN_EMAIL_LENGTH : { "isSuccess": false, "code": 2009, "message":"이메일은 30자리 미만으로 입력해주세요." },

@@ -60,9 +60,11 @@ async function updateOrderComplete(connection, orderedIdx, editStatus) {
 
 async function checkOrderedStatus(connection, orderedIdx) {
   const selectOrderedStatusQuery = `
-      SELECT status
+    SELECT exists(
+      SELECT *
       FROM Ordered
-      WHERE orderedIdx = ?;
+      WHERE orderedIdx = ?
+      )as t;
   `;
 
   const [OrderedStatusRow] = await connection.query(selectOrderedStatusQuery, orderedIdx);
